@@ -47,11 +47,18 @@ app.get('/new', (req, res) => {
 
 app.post('/expenses/new', (req, res) => {
   const expenseData = req.body
+
+  // 接住 打包的資料
+  // 將資料新增到資料庫
+  // render index 新的資料
+  Expense.create(expenseData)
+    .then(() => res.redirect('/'))
+    .catch(err => console.log(err))
 })
 
 
 // 編輯頁
-app.get('/edit', (req, res) => {
+app.get('/expense/edit/:id', (req, res) => {
   res.render('edit')
 })
 
