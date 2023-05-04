@@ -3,6 +3,7 @@ const exphbs = require('express-handlebars')
 const mongoose = require('mongoose')
 const bodyParser = require('body-parser')
 const methodOverride = require('method-override')
+const session = require('express-session')
 const routes = require('./routes')
 
 if (process.env.NODE_ENV !== 'production') {
@@ -22,7 +23,12 @@ app.engine("hbs", exphbs({ defaultLayout: "main", extname: ".hbs" }))
 app.set("view engine", "hbs")
 // body-parser
 app.use(bodyParser.urlencoded({ extended: true }))
-
+//session
+app.use(session({
+  secret: 'MyExpenseTracker',
+  resave: false,
+  saveUninitialized: true
+}))
 // router
 app.use(routes)
 
