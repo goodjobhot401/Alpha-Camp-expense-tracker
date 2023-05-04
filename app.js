@@ -4,6 +4,7 @@ const mongoose = require('mongoose')
 const bodyParser = require('body-parser')
 const methodOverride = require('method-override')
 const session = require('express-session')
+const usePassport = require('./config/passport')
 const routes = require('./routes')
 
 if (process.env.NODE_ENV !== 'production') {
@@ -29,6 +30,9 @@ app.use(session({
   resave: false,
   saveUninitialized: true
 }))
+// passport
+usePassport(app)
+
 // router
 app.use(routes)
 
