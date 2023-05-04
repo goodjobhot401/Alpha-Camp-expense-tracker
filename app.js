@@ -71,6 +71,16 @@ app.post('/expenses/edit/:id', (req, res) => {
 })
 
 
+// 刪除頁
+app.post('/expenses/delete/:id', (req, res) => {
+  const _id = req.params.id
+
+  return Expense.findOneAndDelete({ _id })
+    .then(() => res.redirect('/'))
+    .catch(err => console.log(err))
+})
+
+
 
 app.listen(port, () => {
   console.log(`website is listened on http://localhost:${port}`)
