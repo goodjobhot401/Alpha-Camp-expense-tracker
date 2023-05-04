@@ -19,7 +19,7 @@ db.once('open', () => {
   Promise.all([
     Expense.create(SEED_RECORD)
       .then(() => {
-        console.log('All user and record are created!')
+        console.log('SeedRecord is created!')
         process.exit()
       })
       .catch(err => console.log(err))

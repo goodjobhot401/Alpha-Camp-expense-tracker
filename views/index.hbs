@@ -31,7 +31,7 @@
         <div class="row">
           <div class="col-8 d-flex align-items-center">
             <i class="{{ this.icon }}"></i>
-            <div class="d-inline-block ms-2" style="width: 100px;">
+            <div class="d-inline-block ms-2" style="width: 160px;">
               <span>{{ this.name }}</span>
               <span class="d-block">{{ this.date }}</span>
             </div>
@@ -39,9 +39,10 @@
           </div>
           <div class="col-4 d-flex justify-content-end align-items-center">
             <div>
-              <a href="/expenses/edit/{{ this._id }}" class="btn btn-success me-2" style="height: 80%;">修改</a>
+              <a href="/expenses/edit/{{ this._id }}?_method=PUT" class="btn btn-success me-2"
+                style="height: 80%;">修改</a>
             </div>
-            <form action="/expenses/delete/{{ this._id }}" method="POST" style="display: inline;">
+            <form action="/expenses/delete/{{ this._id }}?_method=DELETE" method="POST" style="display: inline;">
               <button type="submit" class="btn btn-danger" style="height: 100%;">刪除</button>
             </form>
           </div>

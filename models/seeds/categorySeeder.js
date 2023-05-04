@@ -1,26 +1,26 @@
+const mongoose = require('mongoose')
 const Category = require('../category')
+const SEED_CATEGORY = require('./category.json')
 const db = require('../../config/mongoose')
 
-const categoryIcon = {
-  家居物業: "fa-solid fa-house",
-  交通出行: "fa-solid fa-van-shuttle",
-  休閒娛樂: "fa-solid fa-face-grin-beam",
-  聚餐派對: "fa-solid fa-utensils",
-  其他: "fa-solid fa-pen"
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config()
 }
 
+mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
 
-const categories = []
-
-for (let category in Category) {
-  categories.push({ name: category, icon: categoryIcon[category] })
-}
-
-db.once('open', () => {
-  Promise.all(
-    categories.map(item => Category.create(item))
-  )
-    .then(() => console.log(''))
-    .catch(err => console.log(err))
+db.on('error', () => {
+  console.log('mongoose error!')
 })
 
+db.once('open', () => {
+  console.log('mongoose connected!')
+  Promise.all([
+    Category.create(SEED_CATEGORY)
+      .then(() => {
+        console.log('Seed category are created!')
+        process.exit()
+      })
+      .catch(err => console.log(err))
+  ])
+})
