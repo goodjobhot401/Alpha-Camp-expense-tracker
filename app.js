@@ -2,6 +2,7 @@ const express = require('express')
 const exphbs = require('express-handlebars')
 const mongoose = require('mongoose')
 const bodyParser = require('body-parser')
+const Expense = require('./models/expense')
 const app = express()
 const port = 3000
 
@@ -22,7 +23,20 @@ app.use(bodyParser.urlencoded({ extended: true }))
 
 // 主頁面
 app.get('/', (req, res) => {
-  res.render('index')
+  Promise.all([
+    Expense.find()
+      .lean()
+      .then(data => {
+        const expenseData = data.map(record => ({
+          ...record,
+          date: record.date.toISOString().split('T')[0]
+        }))
+        console.log(expenseData)
+        const totalAmount = expenseData.reduce((total, record) => total + record.amount, 0)
+        res.render('index', { expensesRecord: expenseData, totalAmount })
+      })
+      .catch(err => console.log(err))
+  ])
 })
 
 

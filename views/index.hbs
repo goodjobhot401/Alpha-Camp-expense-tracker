@@ -9,30 +9,33 @@
   </div>
 
   {{!-- totalAmount panel --}}
-  <div class="container mt-5" style="width: 50%; margin:0 auto;">
+  <div class="container mt-4" style="width: 50%; margin:0 auto;">
     <div class="row text-center d-flex align-items-end">
       <div class="col col-4 d-flex justify-content-end">
-        <span class="fs-4 fw-bold mb-4">總金額：</span>
+        <span class="fs-4 fw-bold mb-4">記帳總金額：</span>
       </div>
       <div class="col col-8 d-flex justify-content-start">
-        <span class="fw-bolder" style="font-size: 6rem; margin-bottom: 0;">25260</span>
+        <span class="fw-bolder text-danger" style="font-size: 6rem; margin-bottom: 0;">{{#if expensesRecord }} {{
+          totalAmount }}
+          {{/if}}</span>
       </div>
     </div>
   </div>
 
-
   {{!-- list panel --}}
-  <div class="container mt-5" style="width: 50%; margin: 0 auto;">
+  <div class="container" style="width: 60%; margin: 0 auto;">
     <ul class="list-group">
+
+      {{#each expensesRecord}}
       <li class="list-group-item mt-3 shadow">
         <div class="row">
           <div class="col-8 d-flex align-items-center">
             <i class="fa-solid fa-utensils me-3"></i>
             <div class="d-inline-block ms-2" style="width: 100px;">
-              <span>午餐</span>
-              <span>2023/5/3</span>
+              <span>{{ this.name }}</span>
+              <span class="d-block">{{ this.date }}</span>
             </div>
-            <h3 class="flex-fill fw-bold mt-1 text-end">60 元</h3>
+            <h3 class="flex-fill fw-bold mt-1 text-end">{{ this.amount }} 元</h3>
           </div>
           <div class="col-4 d-flex justify-content-end align-items-center">
             <div>
@@ -44,9 +47,11 @@
           </div>
         </div>
       </li>
+      {{/each}}
+
     </ul>
     {{!-- create button --}}
-    <div class="mt-5 d-flex justify-content-center">
+    <div class="mt-5 mb-6 d-flex justify-content-center">
       <a href="./new" class="btn btn-outline-primary">新增支出</a>
     </div>
 
