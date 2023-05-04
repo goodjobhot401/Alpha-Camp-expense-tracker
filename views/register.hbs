@@ -1,1 +1,33 @@
-<h2>Register</h2>
+<div class="row mt-5">
+  <div class="col-md-6 m-auto" style="width: 30%;">
+    <div class="card card-body">
+      <h1 class="text-center mt-3 fw-bolder">註冊</h1>
+      <form action="/users/register" method="POST">
+        <div class="mb-3">
+          <label for="name" class="mb-2 fw-bolder">姓名</label>
+          <input type="text" id="name" name="name" class="form-control" placeholder="Enter Name">
+        </div>
+        <div class="mb-3">
+          <label for="email" class="mb-2 fw-bolder">電子信箱</label>
+          <input type="email" id="email" name="email" class="form-control" placeholder="Enter Email">
+        </div>
+        <div class="mb-3">
+          <label for="password" class="mb-2 fw-bolder">密碼</label>
+          <input type="password" id="password" name="password" class="form-control" placeholder="Enter Password">
+        </div>
+        <div class="mb-3">
+          <label for="confirmPassword" class="mb-2 fw-bolder">確認密碼</label>
+          <input type="password" id="confirmPassword" name="confirmPassword" class="form-control"
+            placeholder="Confirm Password">
+        </div>
+        <div class="mb-3 d-inline d-flex justify-content-center">
+          <button type="submit" class="btn btn-outline-success btn-block me-3" style="width: 70px;">註冊</button>
+          <a href="/auth/facebook" class="btn btn-outline-primary btn-block">Facebook 登入</a>
+        </div>
+      </form>
+      <p class="lead mt-2 mb-0 fs-6">
+        已有帳號? <a href="/users/login">點此登入</a>
+      </p>
+    </div>
+  </div>
+</div>
