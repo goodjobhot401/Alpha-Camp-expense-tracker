@@ -32,6 +32,13 @@ app.use(session({
 }))
 // passport
 usePassport(app)
+// middleware
+app.use((req, res, next) => {
+  res.locals.isAuthenticated = req.isAuthenticated()
+  res.locals.user = req.user // 使用者資料,交給 res.user 使用
+  next()
+})
+
 
 // router
 app.use(routes)

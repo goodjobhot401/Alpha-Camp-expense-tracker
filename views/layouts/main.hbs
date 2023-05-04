@@ -15,9 +15,14 @@
   <nav class="navbar navbar-light bg-light text-center shadow p-3 mb-2 bg-body rounded">
     <div class="container-fluid d-dflex justify-content-between" style="width: 75%;">
       <div class="navbar-text">
-        <a href="/" class="text-success fw-bolder fs-2" style="text-decoration:none">家庭記帳本</a>
+        <a href="/" class="text-success fw-bolder fs-2" style="text-decoration:none">{{#if isAuthenticated }}
+          {{user.name }}'s 私密{{/if}}記帳本</a>
       </div>
-      <button class="btn btn-outline-success fs-4">登出</button>
+      {{#if isAuthenticated}}
+      <a href="/users/logout" class="btn btn-outline-success fs-4">登出</a>
+      {{else}}
+      <a href="/users/login" class="btn btn-outline-success fs-4">登入</a>
+      {{/if}}
     </div>
   </nav>
   {{{ body }}}
