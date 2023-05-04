@@ -21,7 +21,7 @@ app.use(bodyParser.urlencoded({ extended: true }))
 
 
 
-// 主頁面
+// 首頁
 app.get('/', (req, res) => {
   Promise.all([
     Expense.find()
@@ -31,14 +31,13 @@ app.get('/', (req, res) => {
           ...record,
           date: record.date.toISOString().split('T')[0]
         }))
-        console.log(expenseData)
+        //console.log(expenseData)
         const totalAmount = expenseData.reduce((total, record) => total + record.amount, 0)
         res.render('index', { expensesRecord: expenseData, totalAmount })
       })
       .catch(err => console.log(err))
   ])
 })
-
 
 // 新增頁
 app.get('/new', (req, res) => {
@@ -47,10 +46,6 @@ app.get('/new', (req, res) => {
 
 app.post('/expenses/new', (req, res) => {
   const expenseData = req.body
-
-  // 接住 打包的資料
-  // 將資料新增到資料庫
-  // render index 新的資料
   Expense.create(expenseData)
     .then(() => res.redirect('/'))
     .catch(err => console.log(err))
@@ -58,10 +53,22 @@ app.post('/expenses/new', (req, res) => {
 
 
 // 編輯頁
-app.get('/expense/edit/:id', (req, res) => {
-  res.render('edit')
+app.get('/expenses/edit/:id', (req, res) => {
+  const _id = req.params.id
+
+  return Expense.findOne({ _id })
+    .lean()
+    .then(expensesData => res.render('edit', { expensesData }))
+    .catch(err => console.log(err))
 })
 
+app.post('/expenses/edit/:id', (req, res) => {
+  const _id = req.params.id
+
+  return Expense.findOneAndUpdate({ _id }, req.body)
+    .then(() => res.redirect('/'))
+    .catch(err => console.log(err))
+})
 
 
 
