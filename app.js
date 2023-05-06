@@ -11,7 +11,7 @@ const routes = require('./routes')
 require("./config/mongoose");
 // app setting
 const app = express()
-const port = 3000
+const port = process.env.PORT || 3000
 
 // method-override
 app.use(methodOverride('_method'))
@@ -28,7 +28,7 @@ app.set("view engine", "hbs")
 app.use(bodyParser.urlencoded({ extended: true }))
 //session
 app.use(session({
-  secret: 'MyExpenseTracker',
+  secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: true
 }))
