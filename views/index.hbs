@@ -16,7 +16,7 @@
       </div>
       <div class="col col-8 d-flex justify-content-start">
         <span class="fw-bolder text-danger" style="font-size: 6rem; margin-bottom: 0;">{{#if expensesRecord }} {{
-          totalAmount }}
+          totalAmount }} {{else}} 0
           {{/if}}</span>
       </div>
     </div>
@@ -30,12 +30,12 @@
       <li class="list-group-item mt-3 shadow">
         <div class="row">
           <div class="col-8 d-flex align-items-center">
-            <i class="{{ this.icon }}"></i>
+            <i class="{{ this.categoryIcon }} me-2"></i>
             <div class="d-inline-block ms-2" style="width: 160px;">
               <span>{{ this.name }}</span>
               <span class="d-block">{{ this.date }}</span>
             </div>
-            <h3 class="flex-fill fw-bold mt-1 text-end">{{ this.amount }} 元</h3>
+            <h3 class="flex-fill fw-bold mt-1 text-end">{{ this.amount }}</h3>
           </div>
           <div class="col-4 d-flex justify-content-end align-items-center">
             <div>
@@ -53,7 +53,7 @@
     </ul>
     {{!-- create button --}}
     <div class="mt-5 mb-6 d-flex justify-content-center">
-      <a href="./new" class="btn btn-outline-primary">新增支出</a>
+      <a href="/expenses/new" class="btn btn-outline-primary">新增支出</a>
     </div>
 
   </div>

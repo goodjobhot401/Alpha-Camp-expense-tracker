@@ -36,13 +36,13 @@
             <label for="category" class="form-label"><span class="text-danger">*</span>支出類別：</label>
           </div>
           <div class="flex-fill">
-            <select class="form-control" id="category" name="category" value="{{ expensesData.category }}" required>
-              <option selected>類別</option>
-              <option>家居物業</option>
-              <option>交通出行</option>
-              <option>休閒娛樂</option>
-              <option>聚餐派對</option>
-              <option>其他</option>
+            <select class="form-control" id="category" name="category" required>
+              <option>選項</option>
+              <option {{#if (match expensesData.category "家居物業" )}}selected{{/if}} value="家居物業">家居物業</option>
+              <option {{#if (match expensesData.category "交通出行" )}}selected{{/if}} value="交通出行">交通出行</option>
+              <option {{#if (match expensesData.category "休閒娛樂" )}}selected{{/if}} value="休閒娛樂">休閒娛樂</option>
+              <option {{#if (match expensesData.category "聚餐派對" )}}selected{{/if}} value="聚餐派對">聚餐派對</option>
+              <option {{#if (match expensesData.category "其他" )}}selected{{/if}} value="其他">其他</option>
             </select>
           </div>
         </div>
