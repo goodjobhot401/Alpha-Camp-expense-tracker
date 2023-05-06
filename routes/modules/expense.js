@@ -2,7 +2,6 @@ const express = require('express')
 const router = express.Router()
 const Expense = require('../../models/expense')
 const Category = require('../../models/category')
-const category = require('../../models/category')
 
 // 新增頁
 router.get('/new', (req, res) => {
@@ -37,10 +36,6 @@ router.get('/edit/:id', (req, res) => {
         })
         .catch(err => res.render('errorPage', { error: err.message }))
     })
-  // return Expense.findOne({ _id, userId })
-  //   .lean()
-  //   .then(expensesData => res.render('edit', { expensesData }))
-  //   .catch(err => res.render('errorPage', { error: err.message }))
 })
 
 router.put('/edit/:id', (req, res) => {

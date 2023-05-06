@@ -1,11 +1,20 @@
 <div class="conatainer m-auto" style="width: 70%;">
   {{!-- sort bar --}}
   <div class="sort-bar mt-5" style="width: 60%; margin: 0 auto;">
-    <div class="col" style="margin: 0 auto;">
-      <select class="form-select fs-7" name="category" id="category" style="width: 40%; margin: 0 auto;">
-        <option selected>類別</option>
+
+    <form class="d-flex flex-row" action="/filter" method="POST">
+      <select class="form-select" name="categoryId" id="categoryId" style="width: 40%; margin: 0 auto;"
+        onchange="this.form.submit()">
+        {{#if categoryName}}
+        <option value="{{categoryId}}" hidden="hidden" selected="selected">{{categoryName}}</option>
+        {{/if}}
+        <option value="all"> 全部 </option>
+        {{#each categories}}
+        <option value="{{this._id}}"> {{this.name}} </option>
+        {{/each}}
       </select>
-    </div>
+    </form>
+
   </div>
 
   {{!-- totalAmount panel --}}
