@@ -7,7 +7,7 @@ const User = require('../user')
 const Expense = require('../expense')
 const Category = require('../category')
 const bcrypt = require("bcryptjs")
-const user = { name: 'Dad', password: '12345678' }
+const user = { name: 'Dad', email: 'user1@ac.com', password: '12345678' }
 
 const records = [
   { name: "房租", date: "2023/03/05", amount: 15000, category: "家居物業" },
@@ -25,7 +25,7 @@ db.once('open', () => {
   bcrypt
     .genSalt(10)
     .then(salt => bcrypt.hash(user.password, salt))
-    .then(hash => User.create({ name: user.name, password: hash }))
+    .then(hash => User.create({ name: user.name, email: user.email, password: hash }))
     .then(user => {
       const userId = user._id
       return Promise.all(
